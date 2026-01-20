@@ -1,0 +1,95 @@
+/* Reset-ish */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base */
+html {
+  font-size: 16px;
+}
+
+body {
+  background: #000;
+  color: #fff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+}
+
+/* Layout */
+main {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
+
+/* Sections */
+section {
+  margin-bottom: 5rem;
+}
+
+/* Intro */
+.intro h1 {
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+
+.subtitle {
+  opacity: 0.6;
+  margin-top: 0.5rem;
+}
+
+/* Headings */
+h2 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  text-transform: lowercase;
+  opacity: 0.8;
+}
+
+/* Text */
+p {
+  margin-bottom: 1rem;
+  opacity: 0.85;
+}
+
+/* Links */
+a {
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+
+a:hover {
+  border-bottom-color: #fff;
+}
+
+/* Lists */
+ul {
+  list-style: none;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* Media */
+img {
+  max-width: 100%;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+audio, iframe {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+/* Footer */
+footer {
+  margin-top: 6rem;
+  opacity: 0.4;
+  font-size: 0.9rem;
+}
