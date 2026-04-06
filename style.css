@@ -54,7 +54,9 @@ body {
 
 .photo {
   position: absolute;
-  transform: translate(var(--tx), var(--ty)) rotate(var(--r));
+  top: 0; 
+  left: 0; 
+  transform: translate(var(--tx), var(--ty)) translate(-50%, -50%) rotate(var(--r));
   width: var(--w, 200px);
   height: var(--h, 150px);
   box-shadow: 2px 4px 18px rgba(0,0,0,0.10);
