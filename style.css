@@ -52,24 +52,11 @@ body {
   margin-bottom: 1.8rem;
 }
 
-/* .photo {
-  position: absolute;
-  transform: rotate(var(--r)) translate(var(--tx), var(--ty));
-  box-shadow: 2px 4px 18px rgba(0,0,0,0.10);
-  background: #e8e6e1;
-  overflow: hidden;
-  /* transition for subtle hover lift */
-/*
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
-} */
 .photo {
   position: absolute;
-  transform: rotate(var(--r)) translate(var(--tx), var(--ty));
-
-  /* 👇 Add these */
-  width: var(--w, 200px);   /* default if not provided */
+  transform: translate(var(--tx), var(--ty)) rotate(var(--r));
+  width: var(--w, 200px);
   height: var(--h, 150px);
-
   box-shadow: 2px 4px 18px rgba(0,0,0,0.10);
   background: #e8e6e1;
   overflow: hidden;
@@ -79,7 +66,7 @@ body {
 
 .photo:hover {
   box-shadow: 4px 8px 28px rgba(0,0,0,0.16);
-  transform: rotate(var(--r)) translate(var(--tx), calc(var(--ty) - 4px));
+  transform: translate(var(--tx), calc(var(--ty) - 4px)) rotate(var(--r));
   z-index: 10;
 }
 
