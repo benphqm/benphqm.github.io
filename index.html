@@ -5,71 +5,169 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Your Name</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <main>
-    <section class="intro">
-      <h1>Your Name</h1>
-      <p class="subtitle">
-        music · art · code · other things
-      </p>
-    </section>
+  <main class="canvas">
 
-    <section>
-      <h2>Music</h2>
-      <p>Some tracks I made or like.</p>
+    <!-- ═══════════════════════════════════════════
+         TOP HALF
+    ═══════════════════════════════════════════ -->
+    <div class="top-half">
 
-      <!-- Example audio (local file) -->
-      <!--
-      <audio controls>
-        <source src="music/song.mp3" type="audio/mpeg">
-      </audio>
-      -->
+      <!-- A AREA: Photo pinboard + text (55% left) -->
+      <div class="area-a">
 
-      <!-- Example Spotify embed -->
-      <!--
-      <iframe
-        src="https://open.spotify.com/embed/track/..."
-        width="100%"
-        height="152"
-        frameborder="0"
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-      </iframe>
-      -->
-    </section>
+        <!-- Pinboard photos -->
+        <div class="pinboard">
+          <div class="photo photo-l1" style="--r:-2.8deg; --tx:0px; --ty:0px">
+            <img src="images/photo1.jpg" alt="" />
+            <!-- placeholder shown if no image: -->
+            <div class="photo-fill"></div>
+          </div>
+          <div class="photo photo-l2" style="--r:1.6deg; --tx:30px; --ty:48px">
+            <img src="images/photo2.jpg" alt="" />
+            <div class="photo-fill"></div>
+          </div>
+          <div class="photo photo-p1" style="--r:-1.2deg; --tx:310px; --ty:16px">
+            <img src="images/photo3.jpg" alt="" />
+            <div class="photo-fill"></div>
+          </div>
+        </div>
 
-    <section>
-      <h2>Art</h2>
-      <p>Visual experiments.</p>
+        <!-- Weekly note text -->
+        <div class="area-a-text">
+          <p class="note-body">
+            Whatever I want to write about this week. Could be about these photos, something I noticed, something I read. This space is loose — no format.
+          </p>
+        </div>
 
-      <!-- Example images -->
-      <!--
-      <img src="images/art1.jpg" alt="art">
-      <img src="images/art2.jpg" alt="art">
-      -->
-    </section>
+      </div>
 
-    <section>
-      <h2>Code</h2>
-      <p>
-        Small tools, experiments, ideas.
-      </p>
-    </section>
+      <!-- 10% spacer + profile nav trigger lives here -->
+      <div class="top-spacer">
+        <div class="profile-trigger" id="profileTrigger">
+          <div class="trigger-dot"></div>
+          <span class="trigger-label">profile ←</span>
+        </div>
+        <!-- Popup -->
+        <div class="profile-popup" id="profilePopup">
+          <p class="popup-name">Your Name</p>
+          <p class="popup-sub">Data Theory · UCLA · 2nd year</p>
+          <div class="popup-links">
+            <a href="#">github</a>
+            <a href="#">linkedin</a>
+            <a href="#">email</a>
+          </div>
+          <a class="popup-goto" href="profile.html">full profile →</a>
+        </div>
+      </div>
 
-    <section>
-      <h2>Links</h2>
-      <ul>
-        <li><a href="#">Instagram</a></li>
-        <li><a href="#">SoundCloud</a></li>
-        <li><a href="#">Email</a></li>
-      </ul>
-    </section>
+      <!-- D AREA: Song of the week (35% right) -->
+      <div class="area-d">
+        <!-- Title in top-right corner -->
+        <div class="site-title">
+          <span class="name-text">Your Name</span>
+          <span class="contact-text">yourname@ucla.edu · github.com/yourname</span>
+        </div>
 
-    <footer>
-      <p>© your name</p>
-    </footer>
+        <div class="song-card">
+          <div class="song-week-label">song of the week</div>
+          <div class="song-inner">
+            <div class="album-art">
+              <img src="images/album.jpg" alt="album cover" />
+              <div class="album-fill"></div>
+              <button class="play-btn" aria-label="play">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+            </div>
+            <div class="song-meta">
+              <div class="song-title-text">Song Title</div>
+              <div class="song-artist">Artist Name</div>
+              <div class="song-discussion">
+                A few lines about why this song is living in my head. What it sounds like. What it makes me think about.
+              </div>
+              <a class="spotify-link" href="#" target="_blank">→ my spotify recents</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end top-half -->
+
+    <!-- Left nav arrow (navigates to profile page) -->
+    <div class="nav-left">
+      <a href="profile.html" class="nav-arrow-link">
+        <svg viewBox="0 0 60 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M58 12H2M2 12L12 4M2 12L12 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         BOTTOM HALF
+    ═══════════════════════════════════════════ -->
+    <div class="bottom-half">
+
+      <!-- B AREA: What I'm working on (40% of bottom-left) -->
+      <div class="area-b">
+        <div class="area-b-title">what i'm working on</div>
+        <div class="area-b-body">
+          <p>
+            This week: thinking about manifold learning and how t-SNE actually works under the hood. Also applying to summer internships — the usual.
+          </p>
+          <p>
+            Been messing around with a small Python project that does X. Early stages.
+          </p>
+          <div class="b-links">
+            <a href="https://github.com/yourname" target="_blank">→ github.com/yourname</a>
+            <a href="https://www.3blue1brown.com" target="_blank">→ neural networks series (3b1b)</a>
+            <a href="#" target="_blank">→ project repo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- C AREA: Empty / future (60% of bottom-right) -->
+      <div class="area-c">
+        <div class="area-c-placeholder">
+          <span>add stuff here</span>
+        </div>
+      </div>
+
+    </div><!-- end bottom-half -->
+
+    <!-- Down nav arrow -->
+    <div class="nav-down">
+      <a href="#" class="nav-arrow-link">
+        <svg viewBox="0 0 24 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2V58M12 58L4 48M12 58L20 48" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
   </main>
+
+  <script>
+    // Profile trigger hover popup
+    const trigger = document.getElementById('profileTrigger');
+    const popup = document.getElementById('profilePopup');
+    let hideTimer;
+
+    trigger.addEventListener('mouseenter', () => {
+      clearTimeout(hideTimer);
+      popup.classList.add('visible');
+    });
+    trigger.addEventListener('mouseleave', () => {
+      hideTimer = setTimeout(() => popup.classList.remove('visible'), 200);
+    });
+    popup.addEventListener('mouseenter', () => clearTimeout(hideTimer));
+    popup.addEventListener('mouseleave', () => {
+      hideTimer = setTimeout(() => popup.classList.remove('visible'), 200);
+    });
+  </script>
 
 </body>
 </html>
