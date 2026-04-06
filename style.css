@@ -68,16 +68,9 @@ body {
 
 .photo:hover {
   box-shadow: 4px 8px 28px rgba(0,0,0,0.16);
-  transform: translate(var(--tx), calc(var(--ty) - 4px)) translate(-50%, -50%) rotate(var(--r));
+  transform: translate(calc(var(--tx) + 3px), calc(var(--ty) - 4px)) translate(-50%, -50%) rotate(var(--r));
   z-index: 10;
 }
-
-/* Two landscape photos */
-.photo-l1 { width: 220px; height: 150px; top: 0; left: 0; z-index: 2; }
-.photo-l2 { width: 210px; height: 138px; top: 0; left: 0; z-index: 3; }
-
-/* One portrait photo */
-.photo-p1 { width: 130px; height: 190px; top: 0; left: 0; z-index: 1; }
 
 .photo img {
   width: 100%;
