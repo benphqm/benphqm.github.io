@@ -1,95 +1,445 @@
-/* Reset-ish */
-* {
+/* ── Reset ─────────────────────────────────────── */
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* Base */
-html {
-  font-size: 16px;
-}
+/* ── Fonts & base ──────────────────────────────── */
+html { font-size: 16px; }
 
 body {
-  background: #000;
-  color: #fff;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  line-height: 1.6;
+  background: #fff;
+  color: #1a1a1a;
+  font-family: 'EB Garamond', Georgia, serif;
+  line-height: 1.65;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* Layout */
-main {
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 4rem 1.5rem;
+/* ── Canvas: full-viewport grid ────────────────── */
+.canvas {
+  width: 100vw;
+  min-height: 100vh;
+  padding: 3.5rem 4rem 3rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
 }
 
-/* Sections */
-section {
-  margin-bottom: 5rem;
+/* ── TOP HALF ───────────────────────────────────── */
+.top-half {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+  /* A=55%, spacer=10%, D=35% */
+  gap: 0;
 }
 
-/* Intro */
-.intro h1 {
-  font-size: 2.5rem;
-  font-weight: 500;
+/* ── A AREA ─────────────────────────────────────── */
+.area-a {
+  width: 55%;
+  flex-shrink: 0;
+  padding-right: 2rem;
 }
 
-.subtitle {
-  opacity: 0.6;
-  margin-top: 0.5rem;
+/* ── Pinboard ───────────────────────────────────── */
+.pinboard {
+  position: relative;
+  height: 280px;
+  margin-bottom: 1.8rem;
 }
 
-/* Headings */
-h2 {
-  font-size: 1.2rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
-  text-transform: lowercase;
-  opacity: 0.8;
+.photo {
+  position: absolute;
+  transform: rotate(var(--r)) translate(var(--tx), var(--ty));
+  box-shadow: 2px 4px 18px rgba(0,0,0,0.10);
+  background: #e8e6e1;
+  overflow: hidden;
+  /* transition for subtle hover lift */
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+.photo:hover {
+  box-shadow: 4px 8px 28px rgba(0,0,0,0.16);
+  transform: rotate(var(--r)) translate(var(--tx), calc(var(--ty) - 4px));
+  z-index: 10;
 }
 
-/* Text */
-p {
-  margin-bottom: 1rem;
+/* Two landscape photos */
+.photo-l1 { width: 220px; height: 150px; top: 0; left: 0; z-index: 2; }
+.photo-l2 { width: 210px; height: 138px; top: 0; left: 0; z-index: 3; }
+
+/* One portrait photo */
+.photo-p1 { width: 130px; height: 190px; top: 0; left: 0; z-index: 1; }
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Shown if no image file present */
+.photo-fill {
+  position: absolute;
+  inset: 0;
+  background: #dedad4;
+}
+/* Hide placeholder when real image loads */
+.photo img + .photo-fill { display: none; }
+.photo img[src=""] + .photo-fill,
+.photo img:not([src]) + .photo-fill { display: block; }
+
+/* Weekly note */
+.area-a-text {
+  padding-left: 0.2rem;
+}
+
+.note-body {
+  font-size: 1.05rem;
+  color: #2a2a2a;
+  line-height: 1.7;
+  max-width: 480px;
+  font-style: italic;
   opacity: 0.85;
 }
 
-/* Links */
-a {
-  color: #fff;
+/* ── TOP SPACER / Profile nav ───────────────────── */
+.top-spacer {
+  width: 10%;
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 200px; /* push trigger to middle-ish of top half */
+}
+
+.profile-trigger {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  position: relative;
+}
+
+.trigger-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #c0392b;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.profile-trigger:hover .trigger-dot {
+  transform: scale(1.4);
+  background: #e74c3c;
+}
+
+.trigger-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  color: #999;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s, transform 0.2s;
+}
+.profile-trigger:hover .trigger-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Profile popup */
+.profile-popup {
+  position: absolute;
+  top: 180px;
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  background: #fff;
+  border: 1px solid #e0ddd8;
+  border-radius: 2px;
+  padding: 1.1rem 1.3rem;
+  width: 200px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.09);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 100;
+}
+.profile-popup.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.popup-name {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 2px;
+  font-style: normal;
+  opacity: 1;
+}
+.popup-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: #888;
+  margin-bottom: 0.8rem;
+  font-style: normal;
+}
+.popup-links {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 0.8rem;
+}
+.popup-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: #444;
   text-decoration: none;
-  border-bottom: 1px solid rgba(255,255,255,0.3);
+  border-bottom: none;
+  opacity: 0.8;
+  transition: opacity 0.15s;
+}
+.popup-links a:hover { opacity: 1; }
+
+.popup-goto {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: #1a1a1a;
+  text-decoration: none;
+  border-bottom: 1px solid #ccc;
+  transition: border-color 0.15s;
+}
+.popup-goto:hover { border-color: #1a1a1a; }
+
+/* ── D AREA: Song of the week ───────────────────── */
+.area-d {
+  width: 35%;
+  flex-shrink: 0;
+  position: relative;
+  padding-left: 1rem;
 }
 
-a:hover {
-  border-bottom-color: #fff;
+/* Site title: top-right corner of D area */
+.site-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 2rem;
 }
 
-/* Lists */
-ul {
-  list-style: none;
+.name-text {
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
 }
 
-li {
-  margin-bottom: 0.5rem;
+.contact-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  color: #888;
+  letter-spacing: 0.02em;
+  margin-top: 3px;
 }
 
-/* Media */
-img {
-  max-width: 100%;
-  display: block;
+/* Song card: no bounding box, just bare content */
+.song-week-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  color: #aaa;
   margin-bottom: 1rem;
 }
 
-audio, iframe {
-  margin-top: 1rem;
-  width: 100%;
+.song-inner {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
 }
 
-/* Footer */
-footer {
-  margin-top: 6rem;
-  opacity: 0.4;
-  font-size: 0.9rem;
+.album-art {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  flex-shrink: 0;
+  background: #e0ddd8;
+  overflow: hidden;
 }
+
+.album-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.album-fill {
+  position: absolute;
+  inset: 0;
+  background: #d8d5cf;
+}
+.album-art img + .album-fill { display: none; }
+
+.play-btn {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  color: #fff;
+}
+.play-btn:hover { background: rgba(0,0,0,0.35); }
+.play-btn svg {
+  width: 26px;
+  height: 26px;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.2s, transform 0.2s;
+}
+.play-btn:hover svg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.song-meta {
+  flex: 1;
+}
+
+.song-title-text {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.song-artist {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: #888;
+  margin-bottom: 0.8rem;
+}
+
+.song-discussion {
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 0.8rem;
+  font-style: italic;
+}
+
+.spotify-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.66rem;
+  color: #1a1a1a;
+  text-decoration: none;
+  border-bottom: 1px solid #ccc;
+  transition: border-color 0.15s;
+  letter-spacing: 0.02em;
+}
+.spotify-link:hover { border-color: #1a1a1a; }
+
+/* ── Navigation arrows ──────────────────────────── */
+.nav-left {
+  position: absolute;
+  left: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.nav-down {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.nav-arrow-link {
+  display: block;
+  color: #c8c4bd;
+  transition: color 0.2s;
+  text-decoration: none;
+  border-bottom: none;
+}
+.nav-arrow-link:hover { color: #888; }
+
+.nav-left .nav-arrow-link svg { width: 60px; height: 24px; }
+.nav-down .nav-arrow-link svg { width: 24px; height: 48px; }
+
+/* ── BOTTOM HALF ────────────────────────────────── */
+.bottom-half {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 4rem;
+  align-items: flex-start;
+  gap: 0;
+}
+
+/* ── B AREA: Working on (40% of bottom) ─────────── */
+.area-b {
+  width: 40%;
+  flex-shrink: 0;
+  padding-right: 3rem;
+}
+
+.area-b-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: #aaa;
+  margin-bottom: 0.9rem;
+}
+
+.area-b-body p {
+  font-size: 0.95rem;
+  color: #333;
+  margin-bottom: 0.9rem;
+  opacity: 1;
+  line-height: 1.7;
+}
+
+.b-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 0.4rem;
+}
+
+.b-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: #555;
+  text-decoration: none;
+  border-bottom: none;
+  letter-spacing: 0.02em;
+  transition: color 0.15s;
+}
+.b-links a:hover { color: #1a1a1a; }
+
+/* ── C AREA: Empty (60% of bottom-right) ────────── */
+.area-c {
+  width: 60%;
+  flex-shrink: 0;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.area-c-placeholder {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: #ccc;
+}
+
+/* ── Utility ────────────────────────────────────── */
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
