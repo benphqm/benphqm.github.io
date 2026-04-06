@@ -59,6 +59,7 @@ body {
   background: #e8e6e1;
   overflow: hidden;
   /* transition for subtle hover lift */
+/*
   transition: box-shadow 0.25s ease, transform 0.25s ease;
 } */
 .photo {
@@ -72,6 +73,8 @@ body {
   box-shadow: 2px 4px 18px rgba(0,0,0,0.10);
   background: #e8e6e1;
   overflow: hidden;
+
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 .photo:hover {
