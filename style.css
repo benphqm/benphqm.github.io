@@ -68,7 +68,8 @@ body {
 
 .photo:hover {
   box-shadow: 4px 8px 28px rgba(0,0,0,0.16);
-  transform: translate(var(--tx), calc(var(--ty) - 4px)) rotate(var(--r));
+  /* transform: translate(var(--tx), calc(var(--ty) - 4px)) rotate(var(--r)); */
+  transform: translate(10px, 10px) rotate(var(--r));
   z-index: 10;
 }
 
