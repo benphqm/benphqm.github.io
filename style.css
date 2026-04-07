@@ -55,7 +55,7 @@ body {
 
 /* ── A AREA ─────────────────────────────────────── */
 .area-a {
-  width: 55%;
+  width: 67%;
   flex-shrink: 0;
   padding-right: 2rem;
   /* push pinboard down a bit so it doesn't crowd the top */
