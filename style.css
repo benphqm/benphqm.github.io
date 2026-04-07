@@ -117,11 +117,11 @@ body {
 }
 
 /* ── TOP SPACER ─────────────────────────────────── */
-.top-spacer { width: 10%; flex-shrink: 0; }
+.top-spacer { width: 5%; flex-shrink: 0; }
 
 /* ── D AREA ─────────────────────────────────────── */
 .area-d {
-  width: 35%;
+  width: 40%;
   flex-shrink: 0;
   padding-left: 1rem;
   height: 100%;
