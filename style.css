@@ -1,0 +1,508 @@
+/* ── Reset ─────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Fonts & base ──────────────────────────────── */
+html { font-size: 16px; }
+
+body {
+  background: #fff;
+  color: #1a1a1a;
+  font-family: 'EB Garamond', Georgia, serif;
+  line-height: 1.65;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── Canvas ─────────────────────────────────────── */
+.canvas {
+  width: 100vw;
+  min-height: 100vh;
+  padding: 3.5rem 4rem 3rem 4rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* ── TOP HALF ───────────────────────────────────── */
+.top-half {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* ── A AREA ─────────────────────────────────────── */
+.area-a {
+  width: 55%;
+  flex-shrink: 0;
+  padding-right: 2rem;
+  position: relative;
+}
+
+/* ── Pinboard ───────────────────────────────────── */
+.pinboard {
+  position: relative;
+  height: 340px;         /* tall enough for portrait + text */
+  margin-bottom: 1.4rem;
+}
+
+.photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--w, 200px);
+  height: var(--h, 150px);
+  transform: translate(var(--tx), var(--ty)) translate(-50%, -50%) rotate(var(--r));
+  box-shadow: 2px 4px 18px rgba(0,0,0,0.10);
+  background: #e8e6e1;
+  overflow: hidden;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+.photo:hover {
+  box-shadow: 4px 8px 28px rgba(0,0,0,0.16);
+  transform: translate(var(--tx), calc(var(--ty) - 4px)) translate(-50%, -50%) rotate(var(--r));
+  z-index: 10;
+}
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.photo-fill {
+  position: absolute;
+  inset: 0;
+  background: #dedad4;
+}
+.photo img + .photo-fill { display: none; }
+.photo img[src=""] + .photo-fill,
+.photo img:not([src]) + .photo-fill { display: block; }
+
+/* Main text body: to the right of portrait photo, upper area */
+/* Portrait is at tx=384, so right edge ~= 384 + 85 = ~469px (half-width). 
+   We position the text starting around 490px from pinboard left */
+.pinboard-main-text {
+  position: absolute;
+  left: 490px;
+  top: 20px;
+  width: calc(100% - 500px);
+  max-width: 280px;
+}
+.main-body {
+  font-size: 1.05rem;
+  color: #1a1a1a;
+  line-height: 1.72;
+}
+
+/* Secondary text beneath pinboard */
+.area-a-text {
+  padding-left: 0.2rem;
+}
+.note-body {
+  font-size: 0.88rem;
+  color: #666;
+  line-height: 1.65;
+  max-width: 460px;
+  font-style: italic;
+}
+
+/* ── TOP SPACER ─────────────────────────────────── */
+.top-spacer {
+  width: 10%;
+  flex-shrink: 0;
+}
+
+/* ── D AREA ─────────────────────────────────────── */
+.area-d {
+  width: 35%;
+  flex-shrink: 0;
+  padding-left: 1rem;
+}
+
+/* ── Site title / Name ──────────────────────────── */
+.site-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 1.8rem;
+}
+
+/* Name wrapper: hover target for profile popup */
+.name-wrapper {
+  position: relative;
+  display: inline-block;
+  cursor: default;
+}
+
+.name-text {
+  font-size: 2.6rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  display: block;
+  text-align: right;
+}
+
+.contact-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.61rem;
+  color: #aaa;
+  letter-spacing: 0.02em;
+  margin-top: 5px;
+  text-align: right;
+}
+
+/* Profile popup: wide horizontal rectangle */
+.profile-popup {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.2rem;
+  background: #fff;
+  border: 1px solid #e0ddd8;
+  border-radius: 2px;
+  padding: 0.85rem 1.4rem;
+  white-space: nowrap;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.08);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(5px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 200;
+}
+.profile-popup.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.popup-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.popup-name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  font-style: normal;
+  color: #1a1a1a;
+}
+.popup-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  color: #999;
+}
+
+.popup-divider {
+  width: 1px;
+  height: 32px;
+  background: #e0ddd8;
+  flex-shrink: 0;
+}
+
+.popup-links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+.popup-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: #555;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.popup-links a:hover { color: #1a1a1a; }
+
+.popup-goto {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: #1a1a1a !important;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 1px;
+  transition: border-color 0.15s;
+}
+.popup-goto:hover { border-color: #1a1a1a; }
+
+/* ── Song card ──────────────────────────────────── */
+.song-week-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: #aaa;
+  margin-bottom: 0.7rem;
+}
+
+.song-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 0.9rem;
+}
+
+/* Song title + artist: above/left of album */
+.song-header {
+  margin-bottom: 0.5rem;
+}
+.song-title-text {
+  font-size: 1.22rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.song-artist {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: #888;
+  margin-top: 3px;
+}
+
+/* Album art: ~2.2× original (was 110px → now 242px) */
+.album-art {
+  position: relative;
+  width: 242px;
+  height: 242px;
+  flex-shrink: 0;
+  background: #e0ddd8;
+  overflow: hidden;
+  /* A few px gap from right edge of D column — handled by area-d padding */
+}
+.album-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.album-fill {
+  position: absolute;
+  inset: 0;
+  background: #d8d5cf;
+}
+.album-art img + .album-fill { display: none; }
+
+.play-btn {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  color: #fff;
+}
+.play-btn:hover { background: rgba(0,0,0,0.35); }
+.play-btn svg {
+  width: 32px; height: 32px;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.2s, transform 0.2s;
+}
+.play-btn:hover svg { opacity: 1; transform: scale(1); }
+
+/* Progress bar: dark brown, beneath album */
+.progress-bar {
+  width: 242px;
+  height: 3px;
+  background: #e0ddd8;
+  margin-top: 0;        /* flush against album bottom */
+  position: relative;
+  overflow: hidden;
+}
+.progress-fill {
+  width: 35%;            /* static for now */
+  height: 100%;
+  background: #3b2a1a;  /* dark brown */
+}
+
+/* Song description + link: below the album block */
+.song-discussion {
+  font-size: 0.88rem;
+  color: #444;
+  line-height: 1.65;
+  font-style: italic;
+  max-width: 280px;
+  margin-bottom: 0.7rem;
+}
+.spotify-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.64rem;
+  color: #1a1a1a;
+  text-decoration: none;
+  border-bottom: 1px solid #ccc;
+  letter-spacing: 0.02em;
+  transition: border-color 0.15s;
+}
+.spotify-link:hover { border-color: #1a1a1a; }
+
+/* ── Navigation arrows ──────────────────────────── */
+.nav-left {
+  position: absolute;
+  left: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.nav-down {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.nav-arrow-link {
+  display: block;
+  color: #c8c4bd;
+  transition: color 0.2s;
+  text-decoration: none;
+  border-bottom: none;
+}
+.nav-arrow-link:hover { color: #888; }
+.nav-left .nav-arrow-link svg  { width: 60px; height: 24px; }
+.nav-down .nav-arrow-link svg  { width: 24px; height: 48px; }
+
+/* ── Generic interaction dot ─────────────────────── */
+.gallery-dot {
+  position: absolute;
+  top: 3.5rem;
+  left: 4rem;
+  z-index: 50;
+  cursor: pointer;
+}
+
+.interact-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #c0392b;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.interact-dot.active,
+.interact-obj:hover .interact-dot {
+  transform: scale(1.45);
+  background: #e74c3c;
+}
+
+/* Simple text popup for dots */
+.interact-popup-simple {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: #fff;
+  border: 1px solid #e0ddd8;
+  border-radius: 2px;
+  padding: 4px 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  color: #444;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s, transform 0.18s;
+  z-index: 100;
+}
+.interact-popup-simple.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── BOTTOM HALF ────────────────────────────────── */
+.bottom-half {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 4rem;
+  align-items: flex-start;
+}
+
+/* ── B AREA ─────────────────────────────────────── */
+.area-b {
+  width: 40%;
+  flex-shrink: 0;
+  padding-right: 3rem;
+}
+.area-b-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: #aaa;
+  margin-bottom: 0.9rem;
+}
+.area-b-body p {
+  font-size: 0.95rem;
+  color: #333;
+  margin-bottom: 0.9rem;
+  line-height: 1.7;
+}
+.b-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 0.4rem;
+}
+.b-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: #555;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 0.15s;
+}
+.b-links a:hover { color: #1a1a1a; }
+
+/* ── C AREA: Project tabs ───────────────────────── */
+.area-c {
+  width: 60%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-end;    /* tabs sit at bottom of the row */
+  justify-content: flex-end;
+  padding-right: 2.5rem;    /* space between rightmost tab and right margin */
+  min-height: 140px;
+}
+
+.project-tabs {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 0;
+}
+
+.project-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 130px;
+  background: #f0eeeb;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+  /* Tabs touch — no gap */
+}
+.project-tab:hover {
+  transform: translateY(-8px);
+  background: #e8e5e0;
+}
+
+.tab-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  color: #888;
+  letter-spacing: 0.06em;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);  /* text reads bottom-to-top */
+  user-select: none;
+}
+
+/* ── Utility ────────────────────────────────────── */
+a { color: inherit; }
+img { display: block; max-width: 100%; }

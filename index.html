@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ben Pham</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <main class="canvas">
+
+    <!-- Gallery dot: top-left corner of page, (0,0) of area A module -->
+    <div class="interact-obj gallery-dot"
+         data-href="gallery.html"
+         data-popup="See Gallery">
+      <div class="interact-dot"></div>
+      <div class="interact-popup-simple"></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         TOP HALF
+    ═══════════════════════════════════════════ -->
+    <div class="top-half">
+
+      <!-- A AREA: Photo pinboard + text (55% left) -->
+      <div class="area-a">
+
+        <div class="pinboard">
+          <!-- Landscape 1 -->
+          <div class="photo" style="--w:330px; --h:180px; --r:-2.8deg; --tx:150px; --ty:65px">
+            <img src="images/photo1.jpg" alt="" />
+            <div class="photo-fill"></div>
+          </div>
+          <!-- Landscape 2 -->
+          <div class="photo" style="--w:330px; --h:160px; --r:1.6deg; --tx:180px; --ty:178px">
+            <img src="images/photo2.jpg" alt="" />
+            <div class="photo-fill"></div>
+          </div>
+          <!-- Portrait -->
+          <div class="photo" style="--w:170px; --h:300px; --r:-2.2deg; --tx:384px; --ty:160px">
+            <img src="images/photo3.jpg" alt="" />
+            <div class="photo-fill"></div>
+          </div>
+
+          <!-- Main body text: to the right of portrait, upper-center of page -->
+          <div class="pinboard-main-text">
+            <p class="main-body">
+              This website layout is still not perfect. Too bad I have to wait for more Claude messages to code it.
+              One day I will learn HTML instead.
+            </p>
+          </div>
+        </div>
+
+        <!-- Secondary / caption text below pinboard -->
+        <div class="area-a-text">
+          <p class="note-body">
+            Secondary note — context, caption, or whatever else fits here.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- 10% spacer -->
+      <div class="top-spacer"></div>
+
+      <!-- D AREA: Song of the week (35% right) -->
+      <div class="area-d">
+
+        <!-- Name: large, right-aligned. Hover → profile popup -->
+        <div class="site-title">
+          <div class="name-wrapper interact-obj" data-popup="profile">
+            <span class="name-text">Ben Pham</span>
+            <div class="profile-popup" id="profilePopup">
+              <div class="popup-left">
+                <p class="popup-name">Ben Pham</p>
+                <p class="popup-sub">Data Theory · UCLA · Junior</p>
+              </div>
+              <div class="popup-divider"></div>
+              <div class="popup-links">
+                <a href="https://github.com/benphqm" target="_blank">github</a>
+                <a href="https://www.linkedin.com/in/ben-pham-b7a24b3a7" target="_blank">linkedin</a>
+                <a href="mailto:benpham@g.ucla.edu">email</a>
+                <a class="popup-goto" href="profile.html">profile →</a>
+              </div>
+            </div>
+          </div>
+          <span class="contact-text">benpham@ucla.edu · github.com/benphqm</span>
+        </div>
+
+        <!-- Song card -->
+        <div class="song-card">
+          <div class="song-week-label">song of the week</div>
+
+          <div class="song-layout">
+            <!-- Song title + artist sit to the left of / above the album art -->
+            <div class="song-header">
+              <div class="song-title-text">Come Here</div>
+              <div class="song-artist">Sabrina Claudio</div>
+            </div>
+
+            <!-- Album art (large) -->
+            <div class="album-art">
+              <img src="images/album.jpg" alt="album cover" />
+              <div class="album-fill"></div>
+              <button class="play-btn" aria-label="play">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+            </div>
+
+            <!-- Progress bar beneath album -->
+            <div class="progress-bar">
+              <div class="progress-fill"></div>
+            </div>
+          </div>
+
+          <!-- Description below album block -->
+          <div class="song-discussion">
+            This is the song of the week. What is the song of the week?
+            I guess I have been listening to a lot of Ye.
+            But taking into account more time this is the song of the month.
+          </div>
+          <a class="spotify-link" href="https://open.spotify.com/playlist/4ArMqmbNyXPunI8yRSeC40?si=078e352c81ff4613" target="_blank">→ my spotify recents</a>
+        </div>
+
+      </div>
+    </div><!-- end top-half -->
+
+    <!-- Left nav arrow -->
+    <div class="nav-left">
+      <div class="interact-obj" data-href="profile.html" data-arrow="left">
+        <a class="nav-arrow-link" href="profile.html">
+          <svg viewBox="0 0 60 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M58 12H2M2 12L12 4M2 12L12 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         BOTTOM HALF
+    ═══════════════════════════════════════════ -->
+    <div class="bottom-half">
+
+      <!-- B AREA: What I'm working on (40%) -->
+      <div class="area-b">
+        <div class="area-b-title">what i'm working on</div>
+        <div class="area-b-body">
+          <p>
+            This week: Trying to sit in to stochastic processes class. I have three in Ackerman! (And they are all next to each other.) Also applying to summer internships, the usual. Not good.
+          </p>
+          <p>
+            Been thinking about a new Python project. Trying to train an LLM to be really good at being the impostor in Among Us.
+          </p>
+          <div class="b-links">
+            <a href="https://github.com/benphqm" target="_blank">→ github.com/benphqm</a>
+            <a href="https://www.youtube.com/watch?v=ldxFjLJ3rVY" target="_blank">→ Taking the logarithm of an image.</a>
+            <a href="#" target="_blank">→ project repo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- C AREA: Project tabs (60%) -->
+      <div class="area-c">
+        <div class="project-tabs">
+          <a class="project-tab interact-obj" href="project1/index.html" data-href="project1/index.html" data-arrow="tab">
+            <span class="tab-label">project one</span>
+          </a>
+          <a class="project-tab interact-obj" href="project2/index.html" data-href="project2/index.html" data-arrow="tab">
+            <span class="tab-label">project two</span>
+          </a>
+          <a class="project-tab interact-obj" href="project3/index.html" data-href="project3/index.html" data-arrow="tab">
+            <span class="tab-label">project three</span>
+          </a>
+        </div>
+      </div>
+
+    </div><!-- end bottom-half -->
+
+    <!-- Down nav arrow -->
+    <div class="nav-down">
+      <div class="interact-obj" data-href="#" data-arrow="down">
+        <a href="#" class="nav-arrow-link">
+          <svg viewBox="0 0 24 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2V58M12 58L4 48M12 58L20 48" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+  // ── Generic Interaction Object System ────────────────────────────────
+  // .interact-obj elements can have:
+  //   data-href    → navigate on click (unless element is already an <a>)
+  //   data-popup   → "profile" (uses .profile-popup child) | any string (uses .interact-popup-simple)
+  //   data-arrow   → "left"|"down"|"tab" — arrow/tab styling, no extra popup behavior
+
+  document.querySelectorAll('.interact-obj').forEach(obj => {
+    const href    = obj.dataset.href;
+    const popupType = obj.dataset.popup;
+    let hideTimer;
+
+    // ── Simple dot popups (gallery, etc.) ──
+    if (popupType && popupType !== 'profile') {
+      const dot = obj.querySelector('.interact-dot');
+      const sp  = obj.querySelector('.interact-popup-simple');
+      if (sp) sp.textContent = popupType;
+
+      obj.addEventListener('mouseenter', () => {
+        clearTimeout(hideTimer);
+        dot && dot.classList.add('active');
+        sp  && sp.classList.add('visible');
+      });
+      obj.addEventListener('mouseleave', () => {
+        hideTimer = setTimeout(() => {
+          dot && dot.classList.remove('active');
+          sp  && sp.classList.remove('visible');
+        }, 160);
+      });
+
+      // click to navigate
+      if (href) obj.addEventListener('click', () => window.location.href = href);
+      obj.style.cursor = 'pointer';
+    }
+
+    // ── Profile popup (name hover) ──
+    if (popupType === 'profile') {
+      const popup = obj.querySelector('.profile-popup');
+      if (!popup) return;
+      obj.addEventListener('mouseenter', () => { clearTimeout(hideTimer); popup.classList.add('visible'); });
+      obj.addEventListener('mouseleave', () => { hideTimer = setTimeout(() => popup.classList.remove('visible'), 180); });
+      popup.addEventListener('mouseenter', () => clearTimeout(hideTimer));
+      popup.addEventListener('mouseleave', () => { hideTimer = setTimeout(() => popup.classList.remove('visible'), 180); });
+    }
+  });
+  </script>
+
+</body>
+</html>
