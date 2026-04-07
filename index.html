@@ -43,23 +43,25 @@
             </p>
           </div>
         </div>
-        <div class="area-a-text">
-          <p class="note-body">
-            Secondary note — context, caption, or whatever else fits here.
-          </p>
-        </div>
+        <!-- secondary note removed -->
       </div>
 
-      <!-- 10% spacer -->
+      <!-- spacer -->
       <div class="top-spacer"></div>
 
       <!-- D AREA -->
       <div class="area-d">
 
-        <!-- Name: ~50px from top of viewport, right-aligned -->
+        <!-- Name: hover triggers profile popup, anchored to right edge -->
         <div class="site-title">
           <div class="name-wrapper interact-obj" data-popup="profile">
             <span class="name-text">Ben Pham</span>
+            <!--
+              Profile popup.
+              right: 0 keeps it flush with the name's right edge (right side of viewport).
+              This ensures the left edge of the popup stays well inside the D area,
+              clear of the A/D divider.
+            -->
             <div class="profile-popup" id="profilePopup">
               <div class="popup-left">
                 <p class="popup-name">Ben Pham</p>
@@ -80,7 +82,6 @@
         <div class="song-card">
           <div class="song-week-label">song of the week</div>
 
-          <!-- Title+artist left of album upper edge; album + tabs side by side -->
           <div class="song-and-album">
             <div class="song-header">
               <div class="song-title-text">Come Here</div>
@@ -96,7 +97,6 @@
                 </button>
               </div>
 
-              <!-- Two tabs flush to right of album, same height -->
               <div class="album-tabs">
                 <a class="album-tab interact-obj"
                    href="https://open.spotify.com/playlist/4ArMqmbNyXPunI8yRSeC40?si=078e352c81ff4613"
@@ -114,7 +114,6 @@
               </div>
             </div>
 
-            <!-- Progress bar: width of album only -->
             <div class="progress-bar">
               <div class="progress-fill"></div>
             </div>
@@ -139,37 +138,27 @@
       </a>
     </div>
 
-    <!-- BOTTOM HALF -->
-    <div class="bottom-half">
-
-      <!-- B AREA -->
-      <div class="area-b">
-        <div class="area-b-title">what i'm working on</div>
-        <div class="area-b-body">
-          <p>
-            This week: Trying to sit in to stochastic processes class. I have three in Affairs! (And they are all next to each other.) Also applying to summer internships, the usual. Not good.
-          </p>
-          <p>
-            Been thinking about a new Python project. Trying to train an LLM to be really good at being the impostor in Impostor.
-          </p>
-          <div class="b-links">
-            <a href="https://github.com/benphqm" target="_blank">→ github.com/benphqm</a>
-            <a href="https://www.youtube.com/watch?v=ldxFjLJ3rVY" target="_blank">→ Taking the logarithm of an image.</a>
-            <a href="#" target="_blank">→ project repo</a>
-          </div>
+    <!--
+      B AREA: floated absolutely, sits below the left nav arrow.
+      Removed from bottom-half flow entirely.
+      Defined as .area-b-float in style.css.
+    -->
+    <div class="area-b-float">
+      <div class="area-b-title">what i'm working on</div>
+      <div class="area-b-body">
+        <p>
+          This week: Trying to sit in to stochastic processes class. I have three in Affairs! (And they are all next to each other.) Also applying to summer internships, the usual. Not good.
+        </p>
+        <p>
+          Been thinking about a new Python project. Trying to train an LLM to be really good at being the impostor in Impostor.
+        </p>
+        <div class="b-links">
+          <a href="https://github.com/benphqm" target="_blank">→ github.com/benphqm</a>
+          <a href="https://www.youtube.com/watch?v=ldxFjLJ3rVY" target="_blank">→ Taking the logarithm of an image.</a>
+          <a href="#" target="_blank">→ project repo</a>
         </div>
       </div>
-
-      <!-- C AREA: Project tabs -->
-      <div class="area-c">
-        <div class="project-tabs">
-          <a class="project-tab" href="project1/index.html"><span class="tab-label">project one</span></a>
-          <a class="project-tab" href="project2/index.html"><span class="tab-label">project two</span></a>
-          <a class="project-tab" href="project3/index.html"><span class="tab-label">project three</span></a>
-        </div>
-      </div>
-
-    </div><!-- end bottom-half -->
+    </div>
 
     <!-- Down nav arrow -->
     <div class="nav-down">
@@ -178,6 +167,31 @@
           <path d="M12 2V58M12 58L4 48M12 58L20 48" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
+    </div>
+
+    <!--
+      C AREA: project tabs.
+      Defined as .area-c in style.css — position: absolute, bottom-anchored.
+      Each .project-tab uses --tab-color for individual color control.
+      Tabs stack left-to-right with negative margin overlap (~10% of tab width).
+      z-index increases left to right so rightmost tab is on top.
+      Tab height is set so ~20px remains below viewport, revealed on hover.
+    -->
+    <div class="area-c">
+      <div class="project-tabs">
+        <a class="project-tab" href="project1/index.html"
+           style="--tab-color: var(--project-tab-color-default); z-index: 1;">
+          <span class="tab-label">project one</span>
+        </a>
+        <a class="project-tab" href="project2/index.html"
+           style="--tab-color: var(--project-tab-color-default); z-index: 2;">
+          <span class="tab-label">project two</span>
+        </a>
+        <a class="project-tab" href="project3/index.html"
+           style="--tab-color: var(--project-tab-color-default); z-index: 3;">
+          <span class="tab-label">project three</span>
+        </a>
+      </div>
     </div>
 
   </main>
