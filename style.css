@@ -16,22 +16,43 @@ html, body {
 html { font-size: 16px; }
 
 body {
-  background: #fff;
-  color: #1a1a1a;
+  /*
+    Background color system.
+    Change --bg to any color to repaint the whole page.
+    --bg-text auto-inverts for readability (default: dark text on light bg).
+    For a dark theme, set e.g.:
+      --bg: #1a1a1a;
+      --bg-text: #f0eeeb;
+      --bg-muted: #888;
+  */
+  --bg:       #ffffff;
+  --bg-text:  #1a1a1a;
+  --bg-muted: #888888;
+
+  background: var(--bg);
+  color: var(--bg-text);
   font-family: 'EB Garamond', Georgia, serif;
   line-height: 1.65;
 }
 
-/* ── Canvas: fills viewport exactly, no overflow ── */
-/* --name-top: distance from viewport top to name baseline (customizable) */
+/* ── Global design tokens ───────────────────────── */
 :root {
-  --name-top: 50px;
-  --canvas-pad-h: 4rem;   /* left/right padding */
+  --name-top:   50px;     /* px from viewport top to name — customizable */
+  --canvas-pad-h:   4rem; /* left/right page padding */
   --canvas-pad-bot: 2rem;
-  --album-size: 290px;    /* 242 * 1.2 = 290.4 → 290px */
-  --tab-width: 30px;
+  --album-size: 290px;    /* album art square side length */
+  --tab-width:  30px;     /* album sidebar tab width */
+
+  /* Project tab tokens — customizable */
+  --project-tab-color-default: #f0eeeb;   /* base color for all tabs */
+  --project-tab-width:  120px;            /* 48px * 2.5 = 120px */
+  --project-tab-height: 150px;            /* visible height above bottom edge */
+  --project-tab-hidden: 22px;             /* how many px remain below viewport at rest */
+  --project-tab-overlap: 12px;            /* how much each tab covers its left neighbor */
+  --project-tab-border: #ccc9c3;          /* border color for tab outlines */
 }
 
+/* ── Canvas ─────────────────────────────────────── */
 .canvas {
   width: 100vw;
   height: 100vh;
@@ -48,7 +69,6 @@ body {
   flex-direction: row;
   align-items: flex-start;
   width: 100%;
-  /* flex-grow so it eats remaining space above bottom-half */
   flex: 1 1 0;
   min-height: 0;
 }
@@ -58,7 +78,6 @@ body {
   width: 65%;
   flex-shrink: 0;
   padding-right: 2rem;
-  /* push pinboard down a bit so it doesn't crowd the top */
   padding-top: calc(var(--name-top) + 2rem);
   height: 100%;
   overflow: hidden;
@@ -97,24 +116,13 @@ body {
 .pinboard-main-text {
   position: absolute;
   left: 490px;
-  right: 0; 
+  right: 0;
   top: 20px;
-  /* width: calc(100% - 500px);
-  max-width: 350px; */
 }
 .main-body {
   font-size: 1.05rem;
-  color: #1a1a1a;
+  color: var(--bg-text);
   line-height: 1.72;
-}
-
-.area-a-text { padding-left: 0.2rem; }
-.note-body {
-  font-size: 0.88rem;
-  color: #888;
-  line-height: 1.65;
-  max-width: 460px;
-  font-style: italic;
 }
 
 /* ── TOP SPACER ─────────────────────────────────── */
@@ -131,7 +139,6 @@ body {
 }
 
 /* ── Name ───────────────────────────────────────── */
-/* Positioned absolutely so its top aligns to --name-top from viewport */
 .site-title {
   position: absolute;
   top: var(--name-top);
@@ -154,9 +161,15 @@ body {
   line-height: 1;
   display: block;
   text-align: right;
+  color: var(--bg-text);
 }
 
-/* Profile popup: wide horizontal rectangle, drops below name */
+/*
+  Profile popup.
+  right: 0  → popup's right edge aligns with name's right edge (viewport right margin).
+  This guarantees the popup's left edge never drifts left of the D area,
+  keeping it clear of the A/D center divider.
+*/
 .profile-popup {
   position: absolute;
   top: calc(100% + 10px);
@@ -165,7 +178,7 @@ body {
   flex-direction: row;
   align-items: center;
   gap: 1.2rem;
-  background: #fff;
+  background: var(--bg);
   border: 1px solid #e0ddd8;
   border-radius: 2px;
   padding: 0.85rem 1.4rem;
@@ -183,35 +196,32 @@ body {
   transform: translateY(0);
 }
 .popup-left { display: flex; flex-direction: column; gap: 2px; }
-.popup-name { font-size: 0.95rem; font-weight: 500; font-style: normal; color: #1a1a1a; }
-.popup-sub  { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: #999; }
+.popup-name { font-size: 0.95rem; font-weight: 500; font-style: normal; color: var(--bg-text); }
+.popup-sub  { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--bg-muted); }
 .popup-divider { width: 1px; height: 32px; background: #e0ddd8; flex-shrink: 0; }
-.popup-links {
-  display: flex; flex-direction: row; align-items: center; gap: 1rem;
-}
+.popup-links { display: flex; flex-direction: row; align-items: center; gap: 1rem; }
 .popup-links a {
   font-family: 'DM Mono', monospace; font-size: 0.68rem;
   color: #555; text-decoration: none; transition: color 0.15s;
 }
-.popup-links a:hover { color: #1a1a1a; }
+.popup-links a:hover { color: var(--bg-text); }
 .popup-goto {
   font-family: 'DM Mono', monospace; font-size: 0.68rem;
-  color: #1a1a1a !important; border-bottom: 1px solid #ccc;
+  color: var(--bg-text) !important; border-bottom: 1px solid #ccc;
   padding-bottom: 1px; transition: border-color 0.15s;
 }
-.popup-goto:hover { border-color: #1a1a1a; }
+.popup-goto:hover { border-color: var(--bg-text); }
 
 /* ── Song card ──────────────────────────────────── */
-/* Positioned below the name; use margin-top to clear name height + gap */
 .song-card {
-  margin-top: calc(var(--name-top) + 4rem); /* name ~50px + 2.6rem line-height + gap */
+  margin-top: calc(var(--name-top) + 4rem);
 }
 
 .song-week-label {
   font-family: 'DM Mono', monospace;
   font-size: 0.65rem;
   letter-spacing: 0.12em;
-  color: #aaa;
+  color: var(--bg-muted);
   margin-bottom: 0.7rem;
 }
 
@@ -221,30 +231,26 @@ body {
   align-items: flex-start;
 }
 
-/* Song header: sits to the left, level with the top of the album */
-.song-header {
-  margin-bottom: 0.4rem;
-}
+.song-header { margin-bottom: 0.4rem; }
 .song-title-text {
   font-size: 1.22rem;
   font-weight: 500;
   line-height: 1.2;
+  color: var(--bg-text);
 }
 .song-artist {
   font-family: 'DM Mono', monospace;
   font-size: 0.7rem;
-  color: #888;
+  color: var(--bg-muted);
   margin-top: 3px;
 }
 
-/* Album + tabs in a row */
 .album-row {
   display: flex;
   flex-direction: row;
-  align-items: stretch;  /* tabs match album height */
+  align-items: stretch;
 }
 
-/* Album art: 290px (242 * 1.2 ≈ 290) */
 .album-art {
   position: relative;
   width: var(--album-size);
@@ -271,7 +277,6 @@ body {
 }
 .play-btn:hover svg { opacity: 1; transform: scale(1); }
 
-/* Two sidebar tabs: 30px wide, same height as album */
 .album-tabs {
   display: flex;
   flex-direction: row;
@@ -287,13 +292,11 @@ body {
   height: 100%;
   background: #f0eeeb;
   text-decoration: none;
-  transition: background 0.2s ease, transform 0.15s ease;
+  transition: background 0.2s ease;
   position: relative;
   cursor: pointer;
 }
-.album-tab:hover {
-  background: #e4e1dc;
-}
+.album-tab:hover { background: #e4e1dc; }
 
 .album-tab-label {
   font-family: 'DM Mono', monospace;
@@ -306,7 +309,6 @@ body {
   user-select: none;
 }
 
-/* Popup for album tabs: appears above/to the left */
 .album-tab .interact-popup-simple {
   left: auto;
   right: calc(100% + 6px);
@@ -317,7 +319,6 @@ body {
   transform: translateY(-50%) translateX(0);
 }
 
-/* Progress bar: matches album width, no gap from album bottom */
 .progress-bar {
   width: var(--album-size);
   height: 3px;
@@ -359,8 +360,8 @@ body {
   text-decoration: none;
 }
 .nav-arrow-link:hover { color: #888; }
-.nav-left .nav-arrow-link svg { width: 60px; height: 24px; }
-.nav-down .nav-arrow-link svg { width: 24px; height: 40px; }
+.nav-left .nav-arrow-link svg  { width: 60px; height: 24px; }
+.nav-down .nav-arrow-link svg  { width: 24px; height: 40px; }
 
 /* ── Gallery dot ────────────────────────────────── */
 .gallery-dot {
@@ -383,7 +384,7 @@ body {
   top: 18px;
   left: 50%;
   transform: translateX(-50%) translateY(4px);
-  background: #fff;
+  background: var(--bg);
   border: 1px solid #e0ddd8;
   border-radius: 2px;
   padding: 4px 10px;
@@ -402,31 +403,26 @@ body {
   transform: translateX(-50%) translateY(0);
 }
 
-/* ── BOTTOM HALF ────────────────────────────────── */
-.bottom-half {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  flex-shrink: 0;
-  /* fixed height so it never pushes page length */
-  height: 160px;
-  align-items: flex-start;
-  padding-top: 1.2rem;
-}
-
-/* ── B AREA ─────────────────────────────────────── */
-.area-b {
-  width: 40%;
-  flex-shrink: 0;
-  padding-right: 3rem;
+/* ── B AREA (floated) ───────────────────────────────
+   Removed from the bottom-half flex row.
+   Positioned absolutely so it sits directly below the
+   left nav arrow, left-aligned with the page padding.
+   Width matches the old area-b column (~40% of canvas).
+   Defined here as .area-b-float.
+*/
+.area-b-float {
+  position: absolute;
+  left: var(--canvas-pad-h);
+  /* sits roughly in the lower-left quadrant, below the nav arrow */
+  bottom: calc(var(--project-tab-height) - var(--project-tab-hidden) + 3rem);
+  width: 36%;
   overflow: hidden;
-  height: 100%;
 }
 .area-b-title {
   font-family: 'DM Mono', monospace;
   font-size: 0.65rem;
   letter-spacing: 0.12em;
-  color: #aaa;
+  color: var(--bg-muted);
   margin-bottom: 0.6rem;
 }
 .area-b-body p {
@@ -435,46 +431,63 @@ body {
   margin-bottom: 0.6rem;
   line-height: 1.6;
 }
-.b-links {
-  display: flex; flex-direction: column; gap: 3px; margin-top: 0.3rem;
-}
+.b-links { display: flex; flex-direction: column; gap: 3px; margin-top: 0.3rem; }
 .b-links a {
   font-family: 'DM Mono', monospace; font-size: 0.66rem;
   color: #555; text-decoration: none; letter-spacing: 0.02em;
   transition: color 0.15s;
 }
-.b-links a:hover { color: #1a1a1a; }
+.b-links a:hover { color: var(--bg-text); }
 
-/* ── C AREA: Project tabs ───────────────────────── */
+/* ── C AREA: Project tabs ──────────────────────────
+   Positioned absolutely at the bottom-right of the viewport.
+   Tabs are stacked horizontally with negative-margin overlap.
+   Each tab is taller than the visible area; --project-tab-hidden px
+   remain below the viewport edge at rest.
+   Hovering a tab lifts it by --project-tab-hidden px, bringing
+   the bottom flush with the viewport — but never fully revealing it.
+   z-index on individual tabs (set inline) makes rightmost tab on top.
+   --tab-color on each tab controls its fill individually.
+   Defined here as .area-c, .project-tabs, .project-tab, .tab-label.
+*/
 .area-c {
-  width: 60%;
-  flex-shrink: 0;
+  position: absolute;
+  bottom: calc(-1 * var(--project-tab-hidden));  /* push tabs down so hidden portion is below fold */
+  right: var(--canvas-pad-h);
   display: flex;
   align-items: flex-end;
-  justify-content: flex-end;
-  padding-right: 2.5rem;
-  height: 100%;
 }
+
 .project-tabs {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
 }
+
 .project-tab {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 130px;
-  background: #f0eeeb;
+  width: var(--project-tab-width);
+  height: var(--project-tab-height);
+  background: var(--tab-color, var(--project-tab-color-default));
+  border: 1px solid var(--project-tab-border);
   text-decoration: none;
-  transition: transform 0.2s ease, background 0.2s ease;
   cursor: pointer;
+  /* Overlap: each tab after the first slides left over its neighbor */
+  margin-left: calc(-1 * var(--project-tab-overlap));
+  /* Lift animation — translateY moves up by hidden amount on hover */
+  transition: transform 0.22s ease, filter 0.18s ease;
 }
+/* First tab has no negative margin */
+.project-tab:first-child { margin-left: 0; }
+
 .project-tab:hover {
-  transform: translateY(-8px);
-  background: #e8e5e0;
+  transform: translateY(calc(-1 * var(--project-tab-hidden)));
+  /* Darken the tab color slightly on hover using brightness filter */
+  filter: brightness(0.92);
 }
+
 .tab-label {
   font-family: 'DM Mono', monospace;
   font-size: 0.62rem;
