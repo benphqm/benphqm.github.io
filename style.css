@@ -97,9 +97,10 @@ body {
 .pinboard-main-text {
   position: absolute;
   left: 490px;
+  right: 0; 
   top: 20px;
-  width: calc(100% - 500px);
-  max-width: 350px;
+  /* width: calc(100% - 500px);
+  max-width: 350px; */
 }
 .main-body {
   font-size: 1.05rem;
