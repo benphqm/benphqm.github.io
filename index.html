@@ -13,7 +13,7 @@
 
   <main class="canvas">
 
-    <!-- Gallery dot: top-left corner of page, (0,0) of area A module -->
+    <!-- Gallery dot -->
     <div class="interact-obj gallery-dot"
          data-href="gallery.html"
          data-popup="See Gallery">
@@ -21,32 +21,21 @@
       <div class="interact-popup-simple"></div>
     </div>
 
-    <!-- ═══════════════════════════════════════════
-         TOP HALF
-    ═══════════════════════════════════════════ -->
+    <!-- TOP HALF -->
     <div class="top-half">
 
-      <!-- A AREA: Photo pinboard + text (55% left) -->
+      <!-- A AREA -->
       <div class="area-a">
-
         <div class="pinboard">
-          <!-- Landscape 1 -->
           <div class="photo" style="--w:330px; --h:180px; --r:-2.8deg; --tx:150px; --ty:65px">
-            <img src="images/photo1.jpg" alt="" />
-            <div class="photo-fill"></div>
+            <img src="images/photo1.jpg" alt="" /><div class="photo-fill"></div>
           </div>
-          <!-- Landscape 2 -->
           <div class="photo" style="--w:330px; --h:160px; --r:1.6deg; --tx:180px; --ty:178px">
-            <img src="images/photo2.jpg" alt="" />
-            <div class="photo-fill"></div>
+            <img src="images/photo2.jpg" alt="" /><div class="photo-fill"></div>
           </div>
-          <!-- Portrait -->
           <div class="photo" style="--w:170px; --h:300px; --r:-2.2deg; --tx:384px; --ty:160px">
-            <img src="images/photo3.jpg" alt="" />
-            <div class="photo-fill"></div>
+            <img src="images/photo3.jpg" alt="" /><div class="photo-fill"></div>
           </div>
-
-          <!-- Main body text: to the right of portrait, upper-center of page -->
           <div class="pinboard-main-text">
             <p class="main-body">
               This website layout is still not perfect. Too bad I have to wait for more Claude messages to code it.
@@ -54,30 +43,27 @@
             </p>
           </div>
         </div>
-
-        <!-- Secondary / caption text below pinboard -->
         <div class="area-a-text">
           <p class="note-body">
             Secondary note — context, caption, or whatever else fits here.
           </p>
         </div>
-
       </div>
 
       <!-- 10% spacer -->
       <div class="top-spacer"></div>
 
-      <!-- D AREA: Song of the week (35% right) -->
+      <!-- D AREA -->
       <div class="area-d">
 
-        <!-- Name: large, right-aligned. Hover → profile popup -->
+        <!-- Name: ~50px from top of viewport, right-aligned -->
         <div class="site-title">
           <div class="name-wrapper interact-obj" data-popup="profile">
             <span class="name-text">Ben Pham</span>
             <div class="profile-popup" id="profilePopup">
               <div class="popup-left">
                 <p class="popup-name">Ben Pham</p>
-                <p class="popup-sub">Data Theory @ UCLA</p>
+                <p class="popup-sub">Data Theory · UCLA · Junior</p>
               </div>
               <div class="popup-divider"></div>
               <div class="popup-links">
@@ -88,42 +74,57 @@
               </div>
             </div>
           </div>
-          <span class="contact-text">benpham@ucla.edu · github.com/benphqm</span>
         </div>
 
         <!-- Song card -->
         <div class="song-card">
           <div class="song-week-label">song of the week</div>
 
-          <div class="song-layout">
-            <!-- Song title + artist sit to the left of / above the album art -->
+          <!-- Title+artist left of album upper edge; album + tabs side by side -->
+          <div class="song-and-album">
             <div class="song-header">
               <div class="song-title-text">Come Here</div>
               <div class="song-artist">Sabrina Claudio</div>
             </div>
 
-            <!-- Album art (large) -->
-            <div class="album-art">
-              <img src="images/album.jpg" alt="album cover" />
-              <div class="album-fill"></div>
-              <button class="play-btn" aria-label="play">
-                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
-              </button>
+            <div class="album-row">
+              <div class="album-art">
+                <img src="images/album.jpg" alt="album cover" />
+                <div class="album-fill"></div>
+                <button class="play-btn" aria-label="play">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+                </button>
+              </div>
+
+              <!-- Two tabs flush to right of album, same height -->
+              <div class="album-tabs">
+                <a class="album-tab interact-obj"
+                   href="https://open.spotify.com/playlist/4ArMqmbNyXPunI8yRSeC40?si=078e352c81ff4613"
+                   target="_blank"
+                   data-popup="Spotify recents">
+                  <span class="album-tab-label">recents</span>
+                  <div class="interact-popup-simple"></div>
+                </a>
+                <a class="album-tab interact-obj"
+                   href="music.html"
+                   data-popup="Music">
+                  <span class="album-tab-label">music</span>
+                  <div class="interact-popup-simple"></div>
+                </a>
+              </div>
             </div>
 
-            <!-- Progress bar beneath album -->
+            <!-- Progress bar: width of album only -->
             <div class="progress-bar">
               <div class="progress-fill"></div>
             </div>
           </div>
 
-          <!-- Description below album block -->
           <div class="song-discussion">
             This is the song of the week. What is the song of the week?
             I guess I have been listening to a lot of Ye.
             But taking into account more time this is the song of the month.
           </div>
-          <a class="spotify-link" href="https://open.spotify.com/playlist/4ArMqmbNyXPunI8yRSeC40?si=078e352c81ff4613" target="_blank">→ my spotify recents</a>
         </div>
 
       </div>
@@ -131,21 +132,17 @@
 
     <!-- Left nav arrow -->
     <div class="nav-left">
-      <div class="interact-obj" data-href="profile.html" data-arrow="left">
-        <a class="nav-arrow-link" href="profile.html">
-          <svg viewBox="0 0 60 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M58 12H2M2 12L12 4M2 12L12 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-      </div>
+      <a class="nav-arrow-link" href="profile.html">
+        <svg viewBox="0 0 60 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M58 12H2M2 12L12 4M2 12L12 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
     </div>
 
-    <!-- ═══════════════════════════════════════════
-         BOTTOM HALF
-    ═══════════════════════════════════════════ -->
+    <!-- BOTTOM HALF -->
     <div class="bottom-half">
 
-      <!-- B AREA: What I'm working on (40%) -->
+      <!-- B AREA -->
       <div class="area-b">
         <div class="area-b-title">what i'm working on</div>
         <div class="area-b-body">
@@ -153,7 +150,7 @@
             This week: Trying to sit in to stochastic processes class. I have three in Affairs! (And they are all next to each other.) Also applying to summer internships, the usual. Not good.
           </p>
           <p>
-            Been thinking about a new Python project. Trying to train an LLM to be really good at being the impostor in Impostor. 
+            Been thinking about a new Python project. Trying to train an LLM to be really good at being the impostor in Impostor.
           </p>
           <div class="b-links">
             <a href="https://github.com/benphqm" target="_blank">→ github.com/benphqm</a>
@@ -163,18 +160,12 @@
         </div>
       </div>
 
-      <!-- C AREA: Project tabs (60%) -->
+      <!-- C AREA: Project tabs -->
       <div class="area-c">
         <div class="project-tabs">
-          <a class="project-tab interact-obj" href="project1/index.html" data-href="project1/index.html" data-arrow="tab">
-            <span class="tab-label">project one</span>
-          </a>
-          <a class="project-tab interact-obj" href="project2/index.html" data-href="project2/index.html" data-arrow="tab">
-            <span class="tab-label">project two</span>
-          </a>
-          <a class="project-tab interact-obj" href="project3/index.html" data-href="project3/index.html" data-arrow="tab">
-            <span class="tab-label">project three</span>
-          </a>
+          <a class="project-tab" href="project1/index.html"><span class="tab-label">project one</span></a>
+          <a class="project-tab" href="project2/index.html"><span class="tab-label">project two</span></a>
+          <a class="project-tab" href="project3/index.html"><span class="tab-label">project three</span></a>
         </div>
       </div>
 
@@ -182,35 +173,24 @@
 
     <!-- Down nav arrow -->
     <div class="nav-down">
-      <div class="interact-obj" data-href="#" data-arrow="down">
-        <a href="#" class="nav-arrow-link">
-          <svg viewBox="0 0 24 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2V58M12 58L4 48M12 58L20 48" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-      </div>
+      <a href="#" class="nav-arrow-link">
+        <svg viewBox="0 0 24 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2V58M12 58L4 48M12 58L20 48" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
     </div>
 
   </main>
 
   <script>
-  // ── Generic Interaction Object System ────────────────────────────────
-  // .interact-obj elements can have:
-  //   data-href    → navigate on click (unless element is already an <a>)
-  //   data-popup   → "profile" (uses .profile-popup child) | any string (uses .interact-popup-simple)
-  //   data-arrow   → "left"|"down"|"tab" — arrow/tab styling, no extra popup behavior
-
   document.querySelectorAll('.interact-obj').forEach(obj => {
-    const href    = obj.dataset.href;
     const popupType = obj.dataset.popup;
     let hideTimer;
 
-    // ── Simple dot popups (gallery, etc.) ──
     if (popupType && popupType !== 'profile') {
       const dot = obj.querySelector('.interact-dot');
       const sp  = obj.querySelector('.interact-popup-simple');
       if (sp) sp.textContent = popupType;
-
       obj.addEventListener('mouseenter', () => {
         clearTimeout(hideTimer);
         dot && dot.classList.add('active');
@@ -222,13 +202,8 @@
           sp  && sp.classList.remove('visible');
         }, 160);
       });
-
-      // click to navigate
-      if (href) obj.addEventListener('click', () => window.location.href = href);
-      obj.style.cursor = 'pointer';
     }
 
-    // ── Profile popup (name hover) ──
     if (popupType === 'profile') {
       const popup = obj.querySelector('.profile-popup');
       if (!popup) return;
